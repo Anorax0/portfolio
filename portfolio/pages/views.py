@@ -8,3 +8,11 @@ def index(request):
 
 def about(request):
     return render(request, 'pages/about.html')
+
+
+def contact():
+    return HttpResponse('Contact')
+
+
+def projects():
+    return HttpResponse('Projects')
