@@ -11,7 +11,11 @@
 			<div class="col-lg-6 mb-lg-0 mb-5">
 				<h3 class="heading mb-2 text-center"> <span>About </span> Portfolio </h3>
 				<p class="my-4">Welcome in my portfolio website.</p>
-				<p class="mb-4">Firstly it was created to learn Django framework, however, it turns out it is perfect place to present other my projects. Take a look around and have fun.</p>
+				<p class="mb-4">Firstly it was created to learn Django framework, however,
+					it turns out it is perfect place to present other my projects. Take a look around and have fun.</p>
+				<p class="mb-4">This page is build in <a href="https://www.djangoproject.com/"> django framework></a>
+					with <a href="https://www.postgresql.org/">PostgreSQL</a> database.</p>
+				<p class="mb-4">Still in construction :)</p>
 			</div>
 			<div class="col-lg-3 col-md-4 col-6 pr-1 welcome-image">
 				<img src="{% static 'images/a1.jpg' %}" class="img-fluid" alt="" />
@@ -22,63 +26,7 @@
 		</div>
 	</div>
 </section>
-<!-- welcome -->
-
-<!--&lt;!&ndash; welcome bottom &ndash;&gt;-->
-<!--<section class="Welcome-bottom">-->
-<!--	<div class="bs-slider-overlay">-->
-<!--		<div class="container">-->
-<!--			<div class="welcome-bottom-grids row">-->
-
-<!--				&lt;!&ndash; Counter &ndash;&gt;-->
-<!--				<div class="col-lg-6 p-sm-5 p-4 welcome_left Features-bottom">-->
-<!--					<div class="layer p-sm-5 p-4 welcome_left_inner agile-info">-->
-<!--							<div class="agileits_w3layouts_about_counter_left w3-agile-grid">-->
-<!--								<div class="countericon">-->
-<!--									<span class="fab fa-algolia" aria-hidden="true"></span>-->
-<!--									<h3>WHAT</h3>-->
-<!--								</div>-->
-<!--								<div class="counterinfo agile-info">-->
-<!--									<p class="counter">436</p>-->
-<!--								</div>-->
-<!--								<div class="clearfix"> </div>-->
-<!--							</div>-->
-<!--							<div class="mt-sm-5 mt-3 agileits_w3layouts_about_counter_left w3-agile-grid">-->
-<!--								<div class="countericon">-->
-<!--									<span class="fab fa-asymmetrik" aria-hidden="true"></span>-->
-<!--									<h3>THE</h3>-->
-<!--								</div>-->
-<!--								<div class="counterinfo agile-info">-->
-<!--									<p class="counter">147</p>-->
-<!--								</div>-->
-<!--								<div class="clearfix"> </div>-->
-<!--							</div>-->
-<!--							<div class="mt-sm-5 mt-3 agileits_w3layouts_about_counter_left w3-agile-grid">-->
-<!--								<div class="countericon">-->
-<!--									<span class="fas fa-bug" aria-hidden="true"></span>-->
-<!--									<h3>FUCK?</h3>-->
-<!--								</div>-->
-<!--								<div class="counterinfo agile-info">-->
-<!--									<p class="counter">218</p>-->
-<!--								</div>-->
-<!--								<div class="clearfix"> </div>-->
-<!--							</div>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--				&lt;!&ndash; //Counter &ndash;&gt;-->
-<!--				<div class="col-lg-6 p-sm-5 p-4 mt-lg-5 mt-0 welcome_bottom_right">-->
-<!--					<h3>Phasellus lacinia id erat eu. Nunc id ipsum</h3>-->
-<!--					<p class="my-4">Excepteur sint occaecat non proident, sunt in culpa quis. Phasellus lacinia id erat eu ullamcorper. Nunc id ipsum fringilla,-->
-<!--					gravida felis vitae. Phasellus lacinia id, sunt in culpa quis. Phasellus lacinia. gravida felis vitae. Phasellus lacinia id, sunt in culpa quis.</p>-->
-<!--					<div class="read">-->
-<!--						<a href="#" data-toggle="modal" data-target="#ModalCenter5" role="button">Click More <span class="btn ml-2"><i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
-<!--	</div>-->
-<!--</section>-->
-<!--&lt;!&ndash; //welcome bottom &ndash;&gt;-->
+<!--welcome-->
 
 <!-- Skills -->
 <section class="bottom-last">
@@ -90,55 +38,20 @@
 			</div>
 			<div class="row grids">
 				<div class="col-lg-6">
-					<h4 class="title">Proffessional Skills</h4>
+					<h4 class="title">Professional Skills</h4>
 					<p class="my-4">Self-estimated level of skills.<br>
-					<small><small>Do not really be very accurate.</small></small></p>
+					<small><small>Do not really very accurate in my opinion.</small></small></p>
 				</div>
 
-				<!-- todo this should come from db (skill, progress and color) and put it in for loop :) -->
 				<div class="col-md-6 mt-lg-0 mt-5">
-					<div class="progress-one">
-						<h4 class="progress-tittle">Python 3.x</h4>
-						<div class="progress">
-							<div class="progress-bar progress-bar-striped" role="progressbar" style="width: 65%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div>
+					{% for skill in skills %}
 					<div class="progress-one my-4">
-						<h4 class="progress-tittle">Django</h4>
+						<h4 class="progress-tittle">{{ skill.name }}</h4>
 						<div class="progress">
-							<div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 45%" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100"></div>
+							<div class="progress-bar progress-bar-striped {{ skill.color }} " role="progressbar" style="width: {{ skill.percentage }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
 						</div>
 					</div>
-					<div class="progress-one">
-						<h4 class="progress-tittle">Data Analyse</h4>
-						<div class="progress">
-							<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 70%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div>
-					<div class="progress-one my-4">
-						<h4 class="progress-tittle">Excel</h4>
-						<div class="progress">
-							<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 60%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div>
-					<div class="progress-one">
-						<h4 class="progress-tittle">Relational Databases</h4>
-						<div class="progress">
-							<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 25%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div>
-					<div class="progress-one my-4">
-						<h4 class="progress-tittle">NoSQL</h4>
-						<div class="progress">
-							<div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 10%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div>
-					<div class="progress-one">
-						<h4 class="progress-tittle">GUI (via python)</h4>
-						<div class="progress">
-							<div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 30%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div>
+					{% endfor %}
                 </div>
 			</div>
 		</div>

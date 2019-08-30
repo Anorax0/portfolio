@@ -31,10 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'skills.apps.SkillsConfig',
+    'quotes.apps.QuotesConfig',
     'pages.apps.PagesConfig',
     'projects.apps.ProjectsConfig',
-    # 'quotes.apps.QuotesConfig', disabled
-    # 'skills.apps.SkillsConfig', disabled
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
