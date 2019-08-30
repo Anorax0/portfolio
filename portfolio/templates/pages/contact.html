@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- inner page banner -->
+<section class="inner-page-banner">
+	<div class="page-heading text-center">
+		<h2>Contact Page</h2>
+		<span class="section_1-breadcrumbs"><a href="{% url 'index' %}"><i class="fa fa-home home_1"></i> Home</a> <span>/ Contact</span></span>
+	</div>
+</section>
+<!-- //inner page banner -->
+
+<!-- contact -->
+<section class="contact py-5">
+	<div class="container">
+		<div class="heading pb-4">
+			<h3 class="heading mb-2 text-center"> <span>Contact </span> Us </h3>
+			<p class="para mb-5 text-center">In emergency of anything (except spam and low quality jokes), do not hesitate to contact me.</p>
+		</div>
+		<div class="row contact-agileinfo">
+			<div class="contact-right">
+				<form action="#" method="post">
+					{% csrf_token %}
+					<input type="text" name="Name" placeholder="Name" required="">
+					<input type="email" class="email" name="Email" placeholder="Email" required="">
+					<textarea name="Message" placeholder="Message" required=""></textarea>
+					<button type="submit" class="btn btn-primary submit mb-4">Submit</button>
+
+				</form>
+			</div>
+
+		</div>
+	</div>
+</section>
+{% endblock %}
