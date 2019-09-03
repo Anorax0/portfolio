@@ -31,14 +31,14 @@
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title text-capitalize text-center" id="ModalLongTitle"><i class="far fa-lightbulb"></i> Random Quote</h5>
+					<h5 class="modal-title text-capitalize text-center" id="ModalLongTitle"><i class="far fa-lightbulb"></i> {{ quote.title }}</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 			<div class="modal-body">
-				<img src="{% static 'images/bg.jpg' %}" class="img-fluid mb-3" alt="Modal Image" />
-				{ { RANDOM QUOTATION ( maybe with first letter in gothic font?) } }
+				<img src="{{ quote.bg_photo.url }}" class="img-fluid mb-3" alt="{{ quote.title }}" />
+				{{ quote.text }}
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

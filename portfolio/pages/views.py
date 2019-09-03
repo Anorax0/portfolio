@@ -5,13 +5,21 @@ from quotes.models import Quotes
 from projects.models import Projects
 from .models import ContactForm
 
+from random import randint
+
 
 def index(request):
     if request.method == 'GET':
+        # get all skills
         skills = Skills.objects.all()
-        quotes = Quotes.objects.all()
+
+        # get quotes
+        max_id_quites = Quotes.objects.order_by('-id')[0]  # get highest id
+        random_id = randint(1, max_id_quites.id)  # get random id
+        quote = Quotes.objects.get(id=random_id)
+
         projects_list = Projects.objects.all()
-        return render(request, 'pages/index.html', {'skills': skills, 'quotes': quotes, 'projects': projects_list})
+        return render(request, 'pages/index.html', {'skills': skills, 'quote': quote, 'projects': projects_list})
 
     elif request.method == 'POST':
         username = request.POST['username']
