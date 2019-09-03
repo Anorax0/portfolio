@@ -12,15 +12,15 @@
 
                     <div class="login px-4 mx-auto mw-100">
                         <h5 class="text-center mb-4">Login Now</h5>
-                        <form action="#" method="post">
+                        <form id="login-form" action="{% url 'index' %}" method="post">
                             {% csrf_token %}
                             <div class="form-group">
                                 <label class="mb-2">Username</label>
-                                <input type="text" class="form-control" id="exampleInputText"  placeholder="Username" required="">
+                                <input type="text" class="form-control" id="id_username" name="username" placeholder="Username" required="">
                             </div>
                             <div class="form-group">
                                 <label class="mb-2">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password    " required="">
+                                <input type="password" class="form-control" id="id_password" name="password" placeholder="Password" required="">
                             </div>
                             <div class="form-check mb-2">
                                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
