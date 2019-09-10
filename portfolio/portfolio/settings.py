@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'skills.apps.SkillsConfig',
     'quotes.apps.QuotesConfig',
+    'gallery.apps.GalleryConfig',
     'pages.apps.PagesConfig',
     'projects.apps.ProjectsConfig',
     'django.contrib.admin',

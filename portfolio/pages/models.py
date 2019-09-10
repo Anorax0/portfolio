@@ -8,5 +8,9 @@ class ContactForm(models.Model):
     message = models.TextField()
     contact_date = models.DateTimeField(default=datetime.now, blank=True)
 
+    class Meta:
+        verbose_name = "Contact Form"
+        verbose_name_plural = "Contact Forms"
+
     def __str__(self):
         return self.name

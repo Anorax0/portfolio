@@ -7,5 +7,9 @@ class Quotes(models.Model):
     source = models.CharField(max_length=5)
     bg_photo = models.ImageField(upload_to='images/%Y/%m/%d/')
 
+    class Meta:
+        verbose_name = "Quote"
+        verbose_name_plural = "Quotes"
+
     def __str__(self):
         return self.title
