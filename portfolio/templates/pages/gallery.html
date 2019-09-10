@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- inner page banner -->
+<section class="inner-page-banner" xmlns="http://www.w3.org/1999/html">
+	<div class="page-heading text-center">
+		<h2>Contact Page</h2>
+		<span class="section_1-breadcrumbs"><a href="{% url 'index' %}"><i class="fa fa-home home_1"></i> Home</a> <span>/ Gallery</span></span>
+	</div>
+</section>
+<!-- //inner page banner -->
+
+<!-- Gallery -->
+<section class="py-5" id="gallery">
+	<div class="container">
+		<div class="heading pb-4">
+			<h3 class="heading mb-2 text-center"> <span>Images </span> Gallery </h3>
+			</div>
+		<div>
+			{% for image in object_list %}
+			<p>{{ image.title }}<br>
+				<img src="{{ image.image.url }}" alt="{{ image.description}}">
+				</p>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% endblock %}
