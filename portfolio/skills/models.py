@@ -5,6 +5,7 @@ class Skills(models.Model):
     name = models.CharField(max_length=100)
     color = models.CharField(max_length=100, blank=True)
     percentage = models.PositiveSmallIntegerField()
+    is_published = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Skill"

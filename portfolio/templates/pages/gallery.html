@@ -4,7 +4,7 @@
 <!-- inner page banner -->
 <section class="inner-page-banner" xmlns="http://www.w3.org/1999/html">
 	<div class="page-heading text-center">
-		<h2>Contact Page</h2>
+		<h2>Gallery Page</h2>
 		<span class="section_1-breadcrumbs"><a href="{% url 'index' %}"><i class="fa fa-home home_1">
 		</i> Home</a> <span>/ Gallery</span></span>
 	</div>
@@ -12,14 +12,37 @@
 <!-- //inner page banner -->
 
 <!-- Gallery -->
-<section class="py-5" id="gallery">
-	<div class="row">
-		{% for image in object_list %}
+<section id="gallery">
+	<div class="row" style="margin: 10px 10px 10px 10px">
 		<div class="column">
-			<img src="{{ image.image.url }}">
+			{% for image_col1 in images_col1 %}
+				{% if image_col1.is_published %}
+							<img src="{{ image_col1.image.url }}">
+				{% endif %}
+			{% endfor %}
 		</div>
-		{% endfor %}
+		<div class="column">
+			{% for image_col2 in images_col2 %}
+				{% if image_col2.is_published %}
+							<img src="{{ image_col2.image.url }}">
+				{% endif %}
+			{% endfor %}
+		</div>
+		<div class="column">
+			{% for image_col3 in images_col3 %}
+				{% if image_col3.is_published %}
+							<img src="{{ image_col3.image.url }}">
+				{% endif %}
+			{% endfor %}
+		</div>
+		<div class="column">
+			{% for image_col4 in images_col4 %}
+				{% if image_col4.is_published %}
+							<img src="{{ image_col4.image.url }}">
+				{% endif %}
+			{% endfor %}
+		</div>
 	</div>
-
 </section>
+
 {% endblock %}

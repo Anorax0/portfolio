@@ -40,15 +40,16 @@
 				<div class="col-lg-6">
 					<h4 class="title">Professional Skills</h4>
 				</div>
-
 				<div class="col-md-6 mt-lg-0 mt-5">
 					{% for skill in skills %}
-					<div class="progress-one my-4">
-						<h4 class="progress-tittle">{{ skill.name }}</h4>
-						<div class="progress">
-							<div class="progress-bar progress-bar-striped {{ skill.color }} " role="progressbar" style="width: {{ skill.percentage }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-						</div>
-					</div>
+						{% if skill.is_published %}
+							<div class="progress-one my-4">
+								<h4 class="progress-tittle">{{ skill.name }}</h4>
+								<div class="progress">
+									<div class="progress-bar progress-bar-striped {{ skill.color }} " role="progressbar" style="width: {{ skill.percentage }}%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+								</div>
+							</div>
+						{% endif %}
 					{% endfor %}
                 </div>
 			</div>
@@ -59,6 +60,7 @@
 
 <!-- Projects -->
 <section class="features py-5" id="projects">
+	{% if projects %}
 	<div class="container py-sm-5">
 		<div class="heading pb-4">
 			<h3 class="heading mb-2 text-center"> <span>My </span> Projects </h3>
@@ -80,6 +82,7 @@
 			{% endfor %}
 		</div>
 	</div>
+	{% endif %}
 </section>
 <!-- //Projects -->
 

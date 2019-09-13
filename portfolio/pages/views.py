@@ -18,7 +18,8 @@ def index(request):
         random_id = randint(1, max_id_quites.id)  # get random id
         quote = Quotes.objects.get(id=random_id)
 
-        projects_list = Projects.objects.all()
+        projects_list = Projects.objects.all().filter(is_published=True)
+        print(projects_list)
         return render(request, 'pages/index.html', {'skills': skills, 'quote': quote, 'projects': projects_list})
 
     elif request.method == 'POST':
