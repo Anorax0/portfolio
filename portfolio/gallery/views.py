@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from .models import GalleryItems
 
 
@@ -14,5 +14,5 @@ def index(request):
                    'images_col3': images[2], 'images_col4': images[3]})
 
 
-def add():
-    return None
+def image(request, image_id):
+    return HttpResponse(f"<h1>{image_id}</h1>")

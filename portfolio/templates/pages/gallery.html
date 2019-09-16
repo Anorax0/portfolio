@@ -17,32 +17,39 @@
 		<div class="column">
 			{% for image_col1 in images_col1 %}
 				{% if image_col1.is_published %}
-							<img src="{{ image_col1.image.url }}">
+				<a href="{% url 'image' image_col1.pk %}">
+					<img src="{{ image_col1.image.url }}" alt="{{ image_col.title }}" class="myImg">
+				</a>
 				{% endif %}
 			{% endfor %}
 		</div>
 		<div class="column">
 			{% for image_col2 in images_col2 %}
 				{% if image_col2.is_published %}
-							<img src="{{ image_col2.image.url }}">
+				<a href="{% url 'image' image_col2.pk %}">
+					<img src="{{ image_col2.image.url }}" alt="{{ image_col.title }}" class="myImg">
+				</a>
 				{% endif %}
 			{% endfor %}
 		</div>
 		<div class="column">
 			{% for image_col3 in images_col3 %}
 				{% if image_col3.is_published %}
-							<img src="{{ image_col3.image.url }}">
+				<a href="{% url 'image' image_col3.pk %}">
+					<img src="{{ image_col3.image.url }}" alt="{{ image_col.title }}" class="myImg">
+				</a>
 				{% endif %}
 			{% endfor %}
 		</div>
 		<div class="column">
 			{% for image_col4 in images_col4 %}
 				{% if image_col4.is_published %}
-							<img src="{{ image_col4.image.url }}">
+				<a href="{% url 'image' image_col4.pk %}">
+					<img src="{{ image_col4.image.url }}" alt="{{ image_col.title }}" class="myImg">
+				</a>
 				{% endif %}
 			{% endfor %}
 		</div>
 	</div>
 </section>
-
 {% endblock %}
