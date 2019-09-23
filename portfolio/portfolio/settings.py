@@ -144,4 +144,5 @@ MESSAGE_TAGS = {
     messages.SUCCESS: 'success'
 }
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'  # Crispy setting
+# Crispy setting
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
