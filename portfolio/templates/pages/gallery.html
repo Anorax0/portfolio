@@ -13,43 +13,60 @@
 
 <!-- Gallery -->
 <section id="gallery">
-	<div class="row" style="margin: 10px 10px 10px 10px">
-		<div class="column">
-			{% for image_col1 in images_col1 %}
-				{% if image_col1.is_published %}
-				<a href="{% url 'image' image_col1.pk %}">
-					<img src="{{ image_col1.image.url }}" alt="{{ image_col.title }}" class="myImg">
-				</a>
-				{% endif %}
-			{% endfor %}
+	{% if not image %}
+		<div class="row" style="margin: 10px 10px 10px 10px">
+			<div class="column">
+				{% for image_col1 in images_col1 %}
+					{% if image_col1.is_published %}
+					<a href="{% url 'image' image_col1.pk %}">
+						<img src="{{ image_col1.image.url }}" alt="{{ image_col.title }}" class="myImg">
+					</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<div class="column">
+				{% for image_col2 in images_col2 %}
+					{% if image_col2.is_published %}
+					<a href="{% url 'image' image_col2.pk %}">
+						<img src="{{ image_col2.image.url }}" alt="{{ image_col.title }}" class="myImg">
+					</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<div class="column">
+				{% for image_col3 in images_col3 %}
+					{% if image_col3.is_published %}
+					<a href="{% url 'image' image_col3.pk %}">
+						<img src="{{ image_col3.image.url }}" alt="{{ image_col.title }}" class="myImg">
+					</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<div class="column">
+				{% for image_col4 in images_col4 %}
+					{% if image_col4.is_published %}
+					<a href="{% url 'image' image_col4.pk %}">
+						<img src="{{ image_col4.image.url }}" alt="{{ image_col.title }}" class="myImg">
+					</a>
+					{% endif %}
+				{% endfor %}
+			</div>
 		</div>
-		<div class="column">
-			{% for image_col2 in images_col2 %}
-				{% if image_col2.is_published %}
-				<a href="{% url 'image' image_col2.pk %}">
-					<img src="{{ image_col2.image.url }}" alt="{{ image_col.title }}" class="myImg">
-				</a>
-				{% endif %}
-			{% endfor %}
+		<div class="mx-auto m-3">
+			<form method="POST" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form }}
+				<button type="submit">Upload Meme!</button>
+			</form>
 		</div>
-		<div class="column">
-			{% for image_col3 in images_col3 %}
-				{% if image_col3.is_published %}
-				<a href="{% url 'image' image_col3.pk %}">
-					<img src="{{ image_col3.image.url }}" alt="{{ image_col.title }}" class="myImg">
-				</a>
-				{% endif %}
-			{% endfor %}
+	{% elif image %}
+		<div class="mx-auto m-3">
+			<h3 class="heading mb-2 text-center"> {{ image.title }} </h3>
+			<img src="{{ image.image.url }}" alt="{{ image.title }}" class="rounded mx-auto d-block" style="max-width: 800px;">
+			<p class="text-center"><span>Description:</span> {{ image.description }}</p>
 		</div>
-		<div class="column">
-			{% for image_col4 in images_col4 %}
-				{% if image_col4.is_published %}
-				<a href="{% url 'image' image_col4.pk %}">
-					<img src="{{ image_col4.image.url }}" alt="{{ image_col.title }}" class="myImg">
-				</a>
-				{% endif %}
-			{% endfor %}
-		</div>
-	</div>
+	{% else %}
+	<p>Nothing to show.</p>
+	{% endif %}
 </section>
 {% endblock %}

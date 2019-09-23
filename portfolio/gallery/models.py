@@ -1,11 +1,12 @@
 from django.db import models
 from datetime import datetime
+from django import forms
 
 
 class GalleryItems(models.Model):
     image = models.ImageField(upload_to='images/meme')
-    description = models.TextField(max_length=300)
-    title = models.TextField(default='Image')
+    description = models.CharField(max_length=300)
+    title = models.CharField(max_length=100, default='Image')
     date = models.DateTimeField(default=datetime.now, blank=True)
     is_published = models.BooleanField(default=False)
 

@@ -24,5 +24,5 @@ urlpatterns = [
     path('', include('pages.urls')),
     path('admin/', admin.site.urls),
     url(r'^$', lambda x: HttpResponseRedirect('/admin')),
-    path('gallery', include('gallery.urls'))
+    path('gallery/', include('gallery.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
