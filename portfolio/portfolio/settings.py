@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'skills.apps.SkillsConfig',
     'quotes.apps.QuotesConfig',
     'gallery.apps.GalleryConfig',
+    'crispy_forms',
     'pages.apps.PagesConfig',
     'projects.apps.ProjectsConfig',
     'django.contrib.admin',
@@ -140,3 +141,5 @@ MESSAGE_TAGS = {
     messages.ERROR: 'danger',
     messages.SUCCESS: 'success'
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -5,7 +5,8 @@
 <section class="inner-page-banner">
 	<div class="page-heading text-center">
 		<h2>Contact Page</h2>
-		<span class="section_1-breadcrumbs"><a href="{% url 'index' %}"><i class="fa fa-home home_1"></i> Home</a> <span>/ Contact</span></span>
+		<span class="section_1-breadcrumbs"><a href="{% url 'index' %}">
+			<i class="fa fa-home home_1"></i> Home</a> <span>/ <a href="{% url 'contact' %}"> Contact</a></span></span>
 	</div>
 </section>
 <!-- //inner page banner -->
@@ -17,9 +18,9 @@
 			<h3 class="heading mb-2 text-center"> <span>Contact </span> Me </h3>
 			<p class="para mb-5 text-center">In emergency of anything (except spam and low quality jokes), do not hesitate to contact me.</p>
 		</div>
-		<div class="row contact-agileinfo">
+		<div class="row contact-agileinfo m-5 form-group row align-items-center justify-content-center">
 			{% include 'partials/_alerts.html' %}
-			<div class="contact-right">
+			<div class="contact-right text-center">
 				<form action="{% url 'contact' %}" method="POST">
 					{% csrf_token %}
 					<input type="text" name="name" placeholder="Name" required="">
