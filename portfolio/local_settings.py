@@ -16,5 +16,5 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
+ALLOWED_HOSTS = ['anorax.herokuapp.com']
 # DARKSKY_API_KEY = '89aeb1016e0e5068c14f91c54687d28c'

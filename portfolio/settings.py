@@ -21,14 +21,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'bzx+m@*4_2c5ry58%-8(3qk1ex=5+y7v472u$ak#3xq&*71r37'
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
-# DEBUG = True
-ALLOWED_HOSTS = ['anorax.herokuapp.com']
+
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -84,18 +82,6 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-
-# development database configuration
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'portfolio',
-#         'USER': 'postgres',
-#         'PASSWORD': 'justword',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
 
 
 # Password validation
@@ -156,7 +142,7 @@ DARKSKY_API_KEY = os.environ.get('DARKSKY_API_KEY_VALUE')
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# from .local_settings import *
+from .local_settings import *
 
 LOGGING = {
     'version': 1,
