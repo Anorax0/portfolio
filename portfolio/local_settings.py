@@ -1,5 +1,5 @@
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'bzx+m@*4_2c5ry58%-8(3qk1ex=5+y7v472u$ak#3xq&*71r37'
+SECRET_KEY = 'bzx+b@*7_2c5ew58%-8(3qjhgx=5+y7v472u$dk#3yq&*71r37'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
