@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 DEBUG = True
 
-ALLOWED_HOSTS = ['anorax.herokuapp.com']
+ALLOWED_HOSTS = ['*', '127.0.0.1', '127.0.0.1:8000']
 
 
 # Application definition
@@ -196,4 +196,4 @@ bucket = conn.get_bucket(AWS_STORAGE_BUCKET_NAME)
 if not use_sigv4:
     boto.config.remove_section('s3')
 
-# from .local_settings import *
+from .local_settings import *

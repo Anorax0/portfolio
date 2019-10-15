@@ -5,7 +5,7 @@ from .todays_info import TodaysInfo
 from .weather import DarkSkyApi
 from datetime import datetime
 
-from random import randint
+from random import choice
 
 
 def index(request):
@@ -15,9 +15,9 @@ def index(request):
 
         # get quotes
         try:
-            max_id_quites = Quotes.objects.order_by('-id')[0]  # get highest id
-            random_id = randint(1, max_id_quites.id)  # get random id
-            quote = Quotes.objects.get(id=random_id)
+            all_quotes = Quotes.objects.filter().values_list('id', flat=True)
+            random_quote = choice(all_quotes)
+            quote = Quotes.objects.get(id=random_quote)
         except IndexError:
             quote = None
 
