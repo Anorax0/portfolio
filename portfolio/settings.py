@@ -25,10 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
-DEBUG = True
+DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
-ALLOWED_HOSTS = ['*', '127.0.0.1', '127.0.0.1:8000']
+ALLOWED_HOSTS = ['anorax.herokuapp.com']
 
 
 # Application definition
@@ -55,11 +54,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
-# MIDDLEWARE_CLASSES = (
-#     # Simplified static file serving.
-#     # https://warehouse.python.org/project/whitenoise/
-#     'whitenoise.middleware.WhiteNoiseMiddleware',
-# )
 
 ROOT_URLCONF = 'portfolio.urls'
 
@@ -170,9 +164,9 @@ LOGGING = {
 django_heroku.settings(locals())
 
 
-AWS_ACCESS_KEY_ID = 'AKIA6IM2KZZ6LQ5YWLYL' #os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = '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' #os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'anorax-portfolio-files' #os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_REGION_NAME = 'eu-west-3'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
@@ -196,4 +190,3 @@ bucket = conn.get_bucket(AWS_STORAGE_BUCKET_NAME)
 if not use_sigv4:
     boto.config.remove_section('s3')
 
-from .local_settings import *
