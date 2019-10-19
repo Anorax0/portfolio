@@ -180,7 +180,6 @@ if not use_sigv4:
     boto.config.add_section('s3')
     boto.config.set('s3', 'use-sigv4', 'True')
 
-from .local_settings import *
 
 conn = S3Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, host='s3.eu-west-3.amazonaws.com')
 bucket = conn.get_bucket(AWS_STORAGE_BUCKET_NAME)
@@ -203,4 +202,3 @@ EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
 EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
 EMAIL_RECEIVER = os.environ.get('EMAIL_RECEIVER')
 
-from .local_settings import *
