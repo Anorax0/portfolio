@@ -6,6 +6,7 @@ class ContactForm(models.Model):
     name = models.CharField(max_length=200)
     email = models.EmailField()
     message = models.TextField()
+    viewed = models.BooleanField(default=False)
     contact_date = models.DateTimeField(default=datetime.now, blank=True)
 
     class Meta:

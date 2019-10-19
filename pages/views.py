@@ -59,14 +59,16 @@ def about(request):
 
 def contact(request):
     if request.method == 'POST':
+        from .tasks import send_email_task
         name = request.POST['name']
         email = request.POST['email']
         message = request.POST['message']
 
         contact_form = ContactForm(name=name, email=email, message=message)
         contact_form.save()
+        send_email_task.delay(name)
 
-        messages.success(request, 'Your message has been saved.')
+        messages.success(request, 'Your message has been send.')
         return render(request, 'pages/contact.html')
     else:
         return render(request, 'pages/contact.html')

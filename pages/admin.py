@@ -4,8 +4,8 @@ from .weather import DarkSkyApi
 
 
 class ContactFormAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'email', 'contact_date')
-    list_display_links = ('id', 'name', 'email')
+    list_display = ('id', 'viewed', 'name', 'email', 'contact_date')
+    list_display_links = ('id', 'viewed', 'name', 'email')
     search_fields = ('name', 'email')
     list_per_page = 25
 

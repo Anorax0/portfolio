@@ -29,7 +29,6 @@ DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
 ALLOWED_HOSTS = ['anorax.herokuapp.com']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -163,7 +162,6 @@ LOGGING = {
 
 django_heroku.settings(locals())
 
-
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
@@ -182,11 +180,27 @@ if not use_sigv4:
     boto.config.add_section('s3')
     boto.config.set('s3', 'use-sigv4', 'True')
 
+from .local_settings import *
+
 conn = S3Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, host='s3.eu-west-3.amazonaws.com')
 bucket = conn.get_bucket(AWS_STORAGE_BUCKET_NAME)
-# do your stuff
 
 # restore the signature version, if it applies
 if not use_sigv4:
     boto.config.remove_section('s3')
 
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
+EMAIL_RECEIVER = os.environ.get('EMAIL_RECEIVER')
+
+from .local_settings import *
