@@ -163,7 +163,6 @@ LOGGING = {
 
 django_heroku.settings(locals())
 
-
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
@@ -184,7 +183,6 @@ if not use_sigv4:
 
 conn = S3Connection(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, host='s3.eu-west-3.amazonaws.com')
 bucket = conn.get_bucket(AWS_STORAGE_BUCKET_NAME)
-# do your stuff
 
 # restore the signature version, if it applies
 if not use_sigv4:
