@@ -85,13 +85,17 @@
 				</div>
 			<div class="modal-body">
 				<img src="{% static 'images/bg.jpg' %}" class="img-fluid mb-3" alt="Modal Image" />
-				<p><b>Summary: </b>{{ weather.forecast_summary }}</p>
-				<p><b>Temperature: </b> {{ weather.forecast_temperature }} ˚C</p>
-				<p><b>Humidity: </b>{{ weather.forecast_humidity }} %</p>
-				<p><b>Wind Speed: </b>{{ weather.forecast_windspeed }} km/h</p>
-				<p><b>Pressure: </b>{{ weather.forecast_pressure }} hPA</p>
-				<br>
-				<p><a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a></p>
+				{% if weather %}
+					<p><b>Summary: </b>{{ weather.forecast_summary }}</p>
+					<p><b>Temperature: </b> {{ weather.forecast_temperature }} ˚C</p>
+					<p><b>Humidity: </b>{{ weather.forecast_humidity }} %</p>
+					<p><b>Wind Speed: </b>{{ weather.forecast_windspeed }} km/h</p>
+					<p><b>Pressure: </b>{{ weather.forecast_pressure }} hPA</p>
+					<br>
+					<p><a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a></p>
+				{% else %}
+					<p>Cannot load data. Please try again.</p>
+				{% endif %}
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

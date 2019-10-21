@@ -1,8 +1,9 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib import messages, auth
 from .models import ContactForm, Skills, Projects, Quotes
 from .todays_info import TodaysInfo
 from .weather import DarkSkyApi
+from .tasks import send_email_task, get_weather_task
 from datetime import datetime
 
 from random import choice
@@ -28,14 +29,11 @@ def index(request):
         # get actual weather for Gdynia, Poland
         weather = DarkSkyApi.objects.filter(forecast_date__date=datetime.today()).first()
         if weather is None:
-            weather = DarkSkyApi().get()
-            qs = DarkSkyApi(forecast_summary=weather.currently.summary,
-                            forecast_temperature=weather.currently.temperature,
-                            forecast_humidity=weather.currently.humidity,
-                            forecast_windspeed=weather.currently.wind_speed,
-                            forecast_pressure=weather.currently.pressure)
-            qs.save()
-            weather = qs
+            # celery task
+            get_weather_task.delay()
+            # oh my, this shouldn't go this way, no redirects on main side.... so:
+            # todo  retrieve weather data with ajax or set up a cron hourly to load fresh data into db
+            return redirect('index')
 
         projects_list = Projects.objects.all().filter(is_published=True)
 
@@ -59,13 +57,14 @@ def about(request):
 
 def contact(request):
     if request.method == 'POST':
-        from .tasks import send_email_task
         name = request.POST['name']
         email = request.POST['email']
         message = request.POST['message']
 
         contact_form = ContactForm(name=name, email=email, message=message)
         contact_form.save()
+
+        # celery task
         send_email_task.delay(name)
 
         messages.success(request, 'Your message has been send.')
