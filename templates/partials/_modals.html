@@ -1,0 +1,106 @@
+{% load static %}
+
+<!--model-forms-->
+<!-- Vertically centered Modal -->
+
+<!-- TODO THIS MUST BE REFACTOR TO ONLY ONE SCHEMA DUE TO DRY TECHNIQUE AND SHOULD COMES FROM DB (TITLE, TEXT AND IMAGE PROBLEM: IT CAN BE CSS REFACTORING BECAUSE OF UNKNOWN NUMBER OF REPEATS -->
+
+<!-- Modal 1 - Quotes -->
+	<div class="modal fade" id="ModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			{% if quote %}
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-capitalize text-center" id="ModalLongTitle">
+						<i class="far fa-lightbulb"></i> {{ quote.title }}</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			<div class="modal-body">
+				<img src="{{ quote.bg_photo.url }}" class="img-fluid mb-3" alt="{{ quote.title }}" />
+				{{ quote.text }}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+			{% endif %}
+	  </div>
+	</div>
+
+<!-- Modal 2 - Today's Basic Info-->
+	<div class="modal fade" id="ModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-capitalize text-center" id="ModalLongTitle">
+						<i class="far fa-lightbulb"></i> Today's Basic Info</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			<div class="modal-body">
+				<img src="{% static 'images/bg3.jpg' %}" class="img-fluid mb-3" alt="Modal Image" />
+				<p><b>Today's Famous Birthdays: </b>
+					{% if todays_births %}
+						In {{todays_births.year }}, {{ todays_births.description }}
+						[Source: <a href="{{ todays_births.wikipedia.0.wikipedia }}" target="_blank">Wikipedia</a>]</p>
+					{% elif not todays_births %}
+						Nothing interesting...
+					{% endif %}</p>
+				<p><b>Died Today in History: </b>
+					{% if todays_deaths %}
+						In {{todays_deaths.year }}, {{ todays_deaths.description }}
+						[Source: <a href="{{ todays_deaths.wikipedia.0.wikipedia }}" target="_blank">Wikipedia</a>]</p>
+					{% elif not todays_deaths %}
+						Nothing interesting...
+					{% endif %}</p>
+				<p><b>Today's Historical Events: </b>
+					{% if todays_event %}
+						In {{todays_event.year }}, {{ todays_event.description }}
+						[Source: <a href="{{ todays_event.wikipedia.0.wikipedia }}" target="_blank">Wikipedia</a>]</p>
+					{% elif not todays_event %}
+						Nothing interesting...
+					{% endif %}
+				<p><small>All data comes from <a href="https://byabbe.se/on-this-day/" target="_blank">Byabbe API</a> </small></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	  </div>
+	</div>
+
+<!-- Modal 3-->
+	<div class="modal fade" id="ModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title text-capitalize text-center" id="ModalLongTitle">
+						<i class="far fa-lightbulb"></i> Weather in Tricity, Poland</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			<div class="modal-body">
+				<img src="{% static 'images/bg.jpg' %}" class="img-fluid mb-3" alt="Modal Image" />
+				{% if weather %}
+					<p><b>Summary: </b>{{ weather.forecast_summary }}</p>
+					<p><b>Temperature: </b> {{ weather.forecast_temperature }} ˚C</p>
+					<p><b>Humidity: </b>{{ weather.forecast_humidity }} %</p>
+					<p><b>Wind Speed: </b>{{ weather.forecast_windspeed }} km/h</p>
+					<p><b>Pressure: </b>{{ weather.forecast_pressure }} hPA</p>
+					<br>
+					<p><a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a></p>
+				{% else %}
+					<p>Cannot load data. Please try again.</p>
+				{% endif %}
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	  </div>
+	</div>
+<!-- //Vertically centered Modal -->

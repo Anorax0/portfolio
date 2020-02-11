@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<!-- inner page banner -->
+<section class="inner-page-banner">
+	<div class="page-heading text-center">
+		<h2>About Page</h2>
+		<span class="section_1-breadcrumbs"><a href="{% url 'index' %}">
+			<i class="fa fa-home home_1"></i> Home</a> <span>/ <a href="{% url 'about' %}"> About page</a></span></span>
+	</div>
+</section>
+<!-- //inner page banner -->
+
+<!-- welcome -->
+<section class="Welcome py-5">
+	<div class="container py-sm-3">
+		<div class="heading pb-4">
+			<h3 class="heading mb-2 text-center"> <span>About </span> Me </h3>
+			<p class="para mb-5 text-center">My short story</p>
+		</div>
+		<div class="welcome-grids row">
+			<div class="col-lg-6 mb-lg-0 mb-5">
+				<h3 class="mt-lg-4">Jakub Hebel</h3>
+				<p class="my-4">I am an energetic and ambitious person, who likes to take a risk.
+                    I am data analyst in aircraft company. I prefer working alone (you know, focus on task completely in quiet env),
+					however, working in a group is comfortable for me and for rest of a group,
+					because I want to develop myself with constructive feedback (who can give it to me better than others?).</p>
+				<p class="mb-4">Quite interested in anthropology and history, so I read a lot and I like searching for
+                    certain facts, but I also like handcrafting and travelling. I enjoy playing the guitar as well as
+					video and board games. And I like travelling (yep, everyone loves it - but I do not have Instagram, so...)
+					and you can see it in every photo here (made by my own).</p>
+				<p class="mb-4">Most interested in python-language programming.
+					I am self-taught person, reading and watching a lot about entire IT world. I had started with helping other person
+					with university project partially written in python (it is most motivating when I have task where
+					I know how it should looks at the end :) )</p>
+				<p class="mb-4">And a bit later I was coding first scripts in my work (where it was only my initiative)
+					with some task automatization (with brilliant success!). However, I am not software developer, which I would like to be.</p>
+				<p class="mb-4">And now somebody can think how it has started? (meh... of course nobody was thinking about it, only me).
+				In shortly, let say it began somewhere between 2008 and 2009 (as I remember) with Jarkendar, textual browser game
+					based on <a href="https://launchpad.net/vallheru">Vallheru engine</a>. When it's author decided to close the game,
+					I was forced to find a new place, so i had started my own (not so cool, lets say). It's name was Isgaroth,
+					and I was developing it for 3 years. Learning a lot of PHP, front-end and SQL. However, it was time of high school
+					and golden age of this kind of game was gone, so I was doing different stuff. Now I am on my own way, going to became web developer
+					once again (and yes, it is my little dream to make that kind of game once more, some time :) )</p>
+			</div>
+			<div class="col-lg-3 col-md-4 col-6 pr-1 welcome-image">
+				<img src="{% static 'images/a1.jpg' %}" class="img-fluid" style="width: 270px; height: 380px;" alt="Shire" /><br><br>
+				<img src="{% static 'images/c1.jpg' %}" class="img-fluid" style="width: 270px; height: 380px;" alt="Shire" />
+			</div>
+			<div class="col-lg-3 col-md-4 col-6 pl-1 welcome-image">
+				<img src="{% static 'images/a2.jpg' %}" class="img-fluid" style="width: 270px; height: 380px;" alt="Queenstown" /><br><br>
+				<img src="{% static 'images/c2.jpg' %}" class="img-fluid" style="width: 270px; height: 380px;" alt="Queenstown" />
+			</div>
+
+		</div>
+	</div>
+</section>
+<!-- welcome -->
+
+{% endblock %}

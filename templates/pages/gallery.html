@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- inner page banner -->
+<section class="inner-page-banner" xmlns="http://www.w3.org/1999/html">
+	<div class="page-heading text-center">
+		<h2>Gallery Page</h2>
+		<span class="section_1-breadcrumbs"><a href="{% url 'index' %}"><i class="fa fa-home home_1">
+		</i> Home</a> <span>/ <a href="{% url 'gallery' %}"> Gallery</a></span></span>
+	</div>
+</section>
+<!-- //inner page banner -->
+
+<!--Style tag inside body tag is awful, I know, but it was only way for modals to work properly...-->
+<style>
+	.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.column {
+  flex: 25%;
+  max-width: 25%;
+  padding: 0 4px;
+}
+
+.column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .column {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+</style>
+
+<!-- Gallery -->
+<section id="gallery">
+	{% if not image %}
+		<div class="row" style="margin: 10px 10px 10px 10px;">
+			<div class="column">
+				{% for image_col1 in images_col1 %}
+					{% if image_col1.is_published %}
+					<a href="{% url 'image' image_col1.pk %}">
+						<img src="{{ image_col1.image.url }}" alt="{{ image_col.title }}" class="myImg">
+					</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<div class="column">
+				{% for image_col2 in images_col2 %}
+					{% if image_col2.is_published %}
+					<a href="{% url 'image' image_col2.pk %}">
+						<img src="{{ image_col2.image.url }}" alt="{{ image_col.title }}" class="myImg">
+					</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<div class="column">
+				{% for image_col3 in images_col3 %}
+					{% if image_col3.is_published %}
+					<a href="{% url 'image' image_col3.pk %}">
+						<img src="{{ image_col3.image.url }}" alt="{{ image_col.title }}" class="myImg">
+					</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<div class="column">
+				{% for image_col4 in images_col4 %}
+					{% if image_col4.is_published %}
+					<a href="{% url 'image' image_col4.pk %}">
+						<img src="{{ image_col4.image.url }}" alt="{{ image_col.title }}" class="myImg">
+					</a>
+					{% endif %}
+				{% endfor %}
+			</div>
+		</div>
+
+		{% if user.is_authenticated %}
+			<div class="m-5 form-group row align-items-center justify-content-center">
+				<div class="border p-5">
+					<div class="col-xs-3">
+						<form method="POST" enctype="multipart/form-data">
+							{% csrf_token %}
+							<div id="div_id_title" class="form-group">
+								<label for="id_title" class="col-form-label  requiredField">Title<span class="asteriskField">*</span> </label>
+								<div class="">
+									<input type="text" name="title" placeholder="Image Title" maxlength="100" class="textinput textInput form-control" required id="id_title">
+								</div>
+							</div>
+							<div id="div_id_description" class="form-group">
+								<label for="id_description" class="col-form-label  requiredField">Description<span class="asteriskField">*</span></label>
+								<div class="">
+									<input type="text" name="description" placeholder="Image Description" maxlength="300" class="textinput textInput form-control" required id="id_description">
+								</div>
+							</div>
+							<div id="div_id_image" class="form-group">
+								<label for="id_image" class="col-form-label  requiredField">Image<span class="asteriskField">*</span></label>
+								<div class="">
+									<input type="file" name="image" accept="image/*" class="clearablefileinput" required id="id_image">
+								</div>
+							</div>
+
+							<button type="submit" class="btn btn-success">Upload</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	{% elif image %}
+		<div class="mx-auto m-3">
+				<h3 class="heading mb-2 text-center"> {{ image.title }} </h3>
+				<img src="{{ image.image.url }}" alt="{{ image.title }}" class="rounded mx-auto d-block" style="max-width: 800px;">
+				<p class="text-center"><span>Description:</span> {{ image.description }}</p>
+		</div>
+	{% else %}
+	<p>Nothing to show.</p>
+	{% endif %}
+</section>
+{% endblock %}
