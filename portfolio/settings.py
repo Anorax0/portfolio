@@ -14,7 +14,7 @@ import os
 import django_heroku
 import dj_database_url
 
-# uncomment lien below on local dev env
+# uncomment line below on local dev env
 # from .local_settings import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
-ALLOWED_HOSTS = ['anorax.herokuapp.com']
+ALLOWED_HOSTS = ['anorax.herokuapp.com', '*']
 
 # Application definition
 
@@ -177,7 +177,7 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_QUERYSTRING_AUTH = False
 
-# uncomment lien below on local dev env
+# uncomment line below on local dev env
 # from .local_settings import *
 
 import boto
@@ -210,5 +210,5 @@ EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
 EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
 EMAIL_RECEIVER = os.environ.get('EMAIL_RECEIVER')
 
-# uncomment lien below on local dev env
+# uncomment line below on local dev env
 # from .local_settings import *
