@@ -88,3 +88,10 @@ def login(request):
             return HttpResponseRedirect('login')
     else:
         return render(request, 'pages/login.html')
+
+
+def projects(request, project=None):
+    if project == 'compiler':
+        return render(request, 'pages/compiler.html')
+    else:
+        return HttpResponseRedirect('index')

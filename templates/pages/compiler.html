@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+<!-- inner page banner -->
+<section class="inner-page-banner">
+	<div class="page-heading text-center">
+		<h2>About Page</h2>
+		<span class="section_1-breadcrumbs"><a href="{% url 'index' %}">
+			<i class="fa fa-home home_1"></i> Home</a> <span>/ <a href="{% url 'projects' 'compiler' %}"> Excel Compiler</a></span></span>
+	</div>
+</section>
+<!-- //inner page banner -->
+
+<!-- welcome -->
+<section class="Welcome py-5">
+	<div class="container py-sm-3">
+		<div class="heading pb-4">
+			<h3 class="heading mb-2 text-center"> <span>About </span> Project </h3>
+			<p class="para mb-5 text-center">Excel Compiler</p>
+		</div>
+
+		<div class="welcome-grids row">
+			<div class="mb-lg-0 mb-5">
+				<h3 class="mt-lg-4">At the beginning</h3>
+				<p class="my-4">One of processes in my work required from person doing it to download some data files,
+				restructurize them, search for certain values, cross-check etc. This part sometimes took up to 4-5 hours.
+				And then everything was checking in validation system in other tool as a next step in this process.</p>
+				<p class="my-4">If everything was done correctly at first time, entire task for this process took up to 6 hours.
+				But there was a problem. Everytime.</p>
+				<p class="my-4">Normally this took up to 12 hours. Not great, not terrible. Nope, very terrible. Nightmare.</p>
+				<p class="my-4">I decided to solve it somehow.</p>
+			</div>
+			<div class="mb-lg-0 mb-5">
+				<h3 class="mt-lg-4">How it works</h3>
+				<p class="my-4">It is semi-automated process, due to closed API of other tools. However, script shorten
+					time of entire task from about 12 hours to just 1 hour, where running app tooks up to 1.5 second to prepare
+					required documents.</p>
+				<p class="my-4">This step starts with data preparation. User has to download needed files manually and
+					save it in certain directory. Let's say, we can sum records from all the inputed files to 8 thousands.
+				And run the app.</p>
+				<p class="my-4">Secondly, user has to type with which asset he/she would like to work, and then type
+					1 of 2 mode of data, he/she would like to receive.</p>
+				<p class="my-4">After 1, up to 1.5 seconds, user has the output. The app in saving data in known structures,
+				 rearrange them, searches for values, validate and cross-check. If some record is incorrect, user will know about it.
+				Outputed file contains inputed data, some of the critical single steps and almost ready-to-use data.</p>
+				<p class="my-4">Thirdly, outputed data has to be checked due to some incorrect data - normally it is limited
+				to visual check of records.</p>
+				<p class="my-4">Finally, user can user app to extract correct data from above files to receive ready-to-use
+				spreadsheet required in external tool.</p>
+				<p class="my-4">Application in written in Python with <a href="https://openpyxl.readthedocs.io/en/stable/">Openpyxl</a>a library.
+					Runs in console, but exported with <a href="https://www.pyinstaller.org/">PyInstaller</a> to exe file.
+					Using a <a href="https://github.com/tartley/colorama">Colorama</a> and <a href="https://pypi.org/project/termcolor/">Termcolor</a>
+					for output. Due to internal restrictions I cannot show any piece of application.</p>
+			</div>
+		</div>
+
+	</div>
+</section>
+<!-- welcome -->
+
+{% endblock %}
