@@ -15,7 +15,7 @@ import django_heroku
 import dj_database_url
 
 # uncomment line below on local dev env
-from .local_settings import *
+# from .local_settings import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -181,7 +181,7 @@ AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_QUERYSTRING_AUTH = False
 
 # uncomment line below on local dev env
-from .local_settings import *
+# from .local_settings import *
 
 import boto
 from boto.s3.connection import S3Connection
