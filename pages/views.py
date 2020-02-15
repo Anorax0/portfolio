@@ -30,11 +30,13 @@ def index(request):
         weather = DarkSkyApi.objects.filter(forecast_date__date=datetime.today()).first()
         if weather is None:
             # celery task
-            get_weather_task.delay()
+            # get_weather_task.delay()
+            # but somehow it does not work properly, however, it used to...
+            weather = get_weather_task()
+
             # oh my, this shouldn't go this way, no redirects on main side.... so:
             # todo  retrieve weather data with ajax or set up a cron hourly to load fresh data into db
-            return redirect('index')
-
+            # return redirect('index') # this is causing infinity loop when no data is available
         projects_list = Projects.objects.all().filter(is_published=True)
 
         return render(request, 'pages/index.html', {'skills': skills,

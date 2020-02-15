@@ -15,7 +15,7 @@ import django_heroku
 import dj_database_url
 
 # uncomment line below on local dev env
-# from .local_settings import *
+from .local_settings import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,6 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+# DEBUG = True # local env
 
 ALLOWED_HOSTS = ['anorax.herokuapp.com', '*']
 
@@ -85,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
     }
 }
-
+# from .local_settings import DATABASES
 DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 
@@ -145,6 +146,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 DARKSKY_API_KEY = os.environ.get('DARKSKY_API_KEY_VALUE')
 
+# DARKSKY_API_KEY = DARKSKY_API_KEY_VALUE # local env
+
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
@@ -178,7 +181,7 @@ AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_QUERYSTRING_AUTH = False
 
 # uncomment line below on local dev env
-# from .local_settings import *
+from .local_settings import *
 
 import boto
 from boto.s3.connection import S3Connection

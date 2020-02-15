@@ -23,5 +23,5 @@ def get_weather_task():
                     forecast_humidity=weather.currently.humidity,
                     forecast_windspeed=weather.currently.wind_speed,
                     forecast_pressure=weather.currently.pressure)
-    # qs.save()
-    return None
+    qs.save()
+    return qs
