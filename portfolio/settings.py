@@ -15,10 +15,7 @@ import django_heroku
 import dj_database_url
 
 # # SECURITY WARNING: don't run with debug turned on in production!
-try:
-    from .local_settings import *
-except:
-    DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,8 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # # SECURITY WARNING: keep the secret key used in production secret!
-if not DEBUG:
-    SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 ALLOWED_HOSTS = ['*']
 
@@ -77,15 +73,14 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
-if not DEBUG:
-    # Database
-    # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        }
+# Database
+# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
     }
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 
 # Password validation
@@ -142,17 +137,16 @@ MESSAGE_TAGS = {
 # Crispy setting
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-if not DEBUG:
-    DARKSKY_API_KEY = os.environ.get('DARKSKY_API_KEY_VALUE')
+DARKSKY_API_KEY = os.environ.get('DARKSKY_API_KEY_VALUE')
 
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'portfolio.storage.WhiteNoiseStaticFilesStorage'
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
+# COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
 
 
@@ -194,10 +188,9 @@ DEBUG_PROPAGATE_EXCEPTIONS = True
 
 django_heroku.settings(locals())
 
-if not DEBUG:
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
 
 AWS_S3_REGION_NAME = 'eu-west-3'
 AWS_S3_FILE_OVERWRITE = False
@@ -222,18 +215,17 @@ bucket = conn.get_bucket(AWS_STORAGE_BUCKET_NAME)
 if not use_sigv4:
     boto.config.remove_section('s3')
 
-if not DEBUG:
-    CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-if not DEBUG:
-    EMAIL_HOST = os.environ.get('EMAIL_HOST')
-    EMAIL_PORT = os.environ.get('EMAIL_PORT')
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-    EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-    EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
-    EMAIL_RECEIVER = os.environ.get('EMAIL_RECEIVER')
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
+EMAIL_RECEIVER = os.environ.get('EMAIL_RECEIVER')
