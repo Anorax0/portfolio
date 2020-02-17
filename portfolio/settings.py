@@ -14,24 +14,23 @@ import os
 import django_heroku
 import dj_database_url
 
-# uncomment line below on local dev env
-# from .local_settings import *
+# # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+DEBUG = True # local env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+if DEBUG:
+    SECRET_KEY = '34utpu344*)(&hblhih03932##*)#JIBFI#OU#*FB'
+else:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
 
-# # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
-# DEBUG = True # local env
-
-ALLOWED_HOSTS = ['anorax.herokuapp.com', '*']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -78,16 +77,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+if DEBUG:
+    from .local_settings import DATABASES
+else:
+    # Database
+    # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        }
     }
-}
-# from .local_settings import DATABASES
-DATABASES['default'] = dj_database_url.config(conn_max_age=600)
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 
 # Password validation
@@ -144,9 +144,12 @@ MESSAGE_TAGS = {
 # Crispy setting
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-DARKSKY_API_KEY = os.environ.get('DARKSKY_API_KEY_VALUE')
+if DEBUG:
+    from .local_settings import DARKSKY_API_KEY_VALUE
+    DARKSKY_API_KEY = DARKSKY_API_KEY_VALUE
+else:
+    DARKSKY_API_KEY = os.environ.get('DARKSKY_API_KEY_VALUE')
 
-# DARKSKY_API_KEY = DARKSKY_API_KEY_VALUE # local env
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
@@ -187,20 +190,22 @@ LOGGING = {
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
+
 django_heroku.settings(locals())
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+if DEBUG:
+    from .local_settings import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME
+else:
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+
 AWS_S3_REGION_NAME = 'eu-west-3'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_S3_SIGNATURE_VERSION = 's3v4'
 AWS_QUERYSTRING_AUTH = False
-
-# uncomment line below on local dev env
-# from .local_settings import *
 
 import boto
 from boto.s3.connection import S3Connection
@@ -218,19 +223,23 @@ bucket = conn.get_bucket(AWS_STORAGE_BUCKET_NAME)
 if not use_sigv4:
     boto.config.remove_section('s3')
 
-CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+if DEBUG:
+    from .local_settings import CELERY_BROKER_URL
+else:
+    CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST')
-EMAIL_PORT = os.environ.get('EMAIL_PORT')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
-EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
-EMAIL_RECEIVER = os.environ.get('EMAIL_RECEIVER')
-
-# uncomment line below on local dev env
-# from .local_settings import *
+if DEBUG:
+    from .local_settings import EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, \
+        EMAIL_USE_TLS, EMAIL_USE_SSL, EMAIL_RECEIVER
+else:
+    EMAIL_HOST = os.environ.get('EMAIL_HOST')
+    EMAIL_PORT = os.environ.get('EMAIL_PORT')
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+    EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS')
+    EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL')
+    EMAIL_RECEIVER = os.environ.get('EMAIL_RECEIVER')
