@@ -15,8 +15,10 @@ import django_heroku
 import dj_database_url
 
 # # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
-DEBUG = True # local env
+try:
+    from .local_settings import *
+except:
+    DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,9 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # # SECURITY WARNING: keep the secret key used in production secret!
-if DEBUG:
-    SECRET_KEY = '34utpu344*)(&hblhih03932##*)#JIBFI#OU#*FB'
-else:
+if not DEBUG:
     SECRET_KEY = os.environ.get('SECRET_KEY')
 
 ALLOWED_HOSTS = ['*']
@@ -77,12 +77,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
-if DEBUG:
-    try:
-        from .local_settings import DATABASES
-    except:
-        pass
-else:
+if not DEBUG:
     # Database
     # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
     DATABASES = {
@@ -147,10 +142,7 @@ MESSAGE_TAGS = {
 # Crispy setting
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-if DEBUG:
-    from .local_settings import DARKSKY_API_KEY_VALUE
-    DARKSKY_API_KEY = DARKSKY_API_KEY_VALUE
-else:
+if not DEBUG:
     DARKSKY_API_KEY = os.environ.get('DARKSKY_API_KEY_VALUE')
 
 
@@ -196,9 +188,7 @@ DEBUG_PROPAGATE_EXCEPTIONS = True
 
 django_heroku.settings(locals())
 
-if DEBUG:
-    from .local_settings import AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_STORAGE_BUCKET_NAME
-else:
+if not DEBUG:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
@@ -226,19 +216,14 @@ bucket = conn.get_bucket(AWS_STORAGE_BUCKET_NAME)
 if not use_sigv4:
     boto.config.remove_section('s3')
 
-if DEBUG:
-    from .local_settings import CELERY_BROKER_URL
-else:
+if not DEBUG:
     CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
 
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-if DEBUG:
-    from .local_settings import EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, \
-        EMAIL_USE_TLS, EMAIL_USE_SSL, EMAIL_RECEIVER
-else:
+if not DEBUG:
     EMAIL_HOST = os.environ.get('EMAIL_HOST')
     EMAIL_PORT = os.environ.get('EMAIL_PORT')
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
