@@ -140,13 +140,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 DARKSKY_API_KEY = os.environ.get('DARKSKY_API_KEY_VALUE')
 
 
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STATICFILES_STORAGE = 'portfolio.storage.WhiteNoiseStaticFilesStorage'
-# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
-# COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
 
 
