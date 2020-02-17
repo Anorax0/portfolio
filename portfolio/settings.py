@@ -78,7 +78,10 @@ TEMPLATES = [
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 if DEBUG:
-    from .local_settings import DATABASES
+    try:
+        from .local_settings import DATABASES
+    except:
+        pass
 else:
     # Database
     # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
