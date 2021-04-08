@@ -139,7 +139,6 @@ MESSAGE_TAGS = {
 # Crispy setting
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# DARKSKY_API_KEY = os.environ.get('DARKSKY_API_KEY_VALUE')
 
 
 LOGGING = {

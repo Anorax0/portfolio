@@ -3,6 +3,7 @@ from datetime import datetime
 
 
 class ContactForm(models.Model):
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=200)
     email = models.EmailField()
     message = models.TextField()
@@ -18,6 +19,7 @@ class ContactForm(models.Model):
 
 
 class Skills(models.Model):
+    id = models.IntegerField(primary_key=True)
     name = models.CharField(max_length=100)
     color = models.CharField(max_length=100, blank=True)
     percentage = models.PositiveSmallIntegerField()
@@ -32,6 +34,7 @@ class Skills(models.Model):
 
 
 class Projects(models.Model):
+    id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=200)
     description = models.TextField()
     address = models.URLField()
@@ -47,6 +50,7 @@ class Projects(models.Model):
 
 
 class Quotes(models.Model):
+    id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=200)
     text = models.CharField(max_length=1000)
     source = models.CharField(max_length=5)
