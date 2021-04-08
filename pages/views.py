@@ -1,10 +1,8 @@
-from django.shortcuts import render, HttpResponseRedirect, redirect
+from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import messages, auth
 from .models import ContactForm, Skills, Projects, Quotes
 from .todays_info import TodaysInfo
-# from .weather import DarkSkyApi
-from .tasks import send_email_task #get_weather_task
-from datetime import datetime
+from .tasks import send_email_task
 
 from random import choice
 
@@ -33,8 +31,7 @@ def index(request):
                                                     'projects': projects_list,
                                                     'todays_event': todays_event,
                                                     'todays_deaths': todays_deaths,
-                                                    'todays_births': todays_births
-                                                    })
+                                                    'todays_births': todays_births})
 
     elif request.method == 'POST':
         login(request)
