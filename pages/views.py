@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.contrib import messages, auth
 from .models import ContactForm, Skills, Projects, Quotes
 from .todays_info import TodaysInfo
-from .weather import DarkSkyApi
+# from .weather import DarkSkyApi
 from .tasks import send_email_task, get_weather_task
 from datetime import datetime
 
@@ -27,12 +27,12 @@ def index(request):
         todays_births = TodaysInfo().todays_births()
 
         # get actual weather for Gdynia, Poland
-        weather = DarkSkyApi.objects.filter(forecast_date__date=datetime.today()).first()
-        if weather is None:
+#         weather = DarkSkyApi.objects.filter(forecast_date__date=datetime.today()).first()
+#         if weather is None:
             # celery task
             # get_weather_task.delay()
             # but somehow it does not work properly, however, it used to...
-            weather = get_weather_task()
+#             weather = get_weather_task()
 
             # oh my, this shouldn't go this way, no redirects on main side.... so:
             # todo  retrieve weather data with ajax or set up a cron hourly to load fresh data into db
@@ -45,7 +45,7 @@ def index(request):
                                                     'todays_event': todays_event,
                                                     'todays_deaths': todays_deaths,
                                                     'todays_births': todays_births,
-                                                    'weather': weather
+#                                                     'weather': weather
                                                     })
 
     elif request.method == 'POST':
