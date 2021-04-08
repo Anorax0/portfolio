@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import ContactForm, Projects, Skills, Quotes
-from .weather import DarkSkyApi
+# from .weather import DarkSkyApi
 
 
 class ContactFormAdmin(admin.ModelAdmin):
@@ -26,12 +26,12 @@ class QuotesAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'title')
 
 
-class WeatherAdmin(admin.ModelAdmin):
-    list_display = ('id', 'forecast_date', 'forecast_summary', 'forecast_temperature', 'forecast_pressure')
-    list_display_links = ('id', 'forecast_date', 'forecast_summary')
+# class WeatherAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'forecast_date', 'forecast_summary', 'forecast_temperature', 'forecast_pressure')
+#     list_display_links = ('id', 'forecast_date', 'forecast_summary')
 
 
-admin.site.register(DarkSkyApi, WeatherAdmin)
+# admin.site.register(DarkSkyApi, WeatherAdmin)
 admin.site.register(Quotes, QuotesAdmin)
 admin.site.register(Skills, SkillsAdmin)
 admin.site.register(Projects, ProjectsAdmin)
