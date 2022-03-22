@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0008_auto_20191015_1758'),
+        ("pages", "0008_auto_20191015_1758"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='contactform',
-            name='viewed',
+            model_name="contactform",
+            name="viewed",
             field=models.BooleanField(default=False),
         ),
     ]

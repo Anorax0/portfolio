@@ -7,13 +7,13 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0007_auto_20191003_1814'),
+        ("pages", "0007_auto_20191003_1814"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='darkskyapi',
-            name='forecast_date',
+            model_name="darkskyapi",
+            name="forecast_date",
             field=models.DateTimeField(default=django.utils.timezone.now),
         ),
     ]

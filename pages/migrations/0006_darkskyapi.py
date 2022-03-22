@@ -7,20 +7,31 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0005_projects_quotes_skills'),
+        ("pages", "0005_projects_quotes_skills"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='DarkSkyApi',
+            name="DarkSkyApi",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('forecast_summary', models.CharField(max_length=1000)),
-                ('forecast_temperature', models.FloatField()),
-                ('forecast_humidity', models.FloatField()),
-                ('forecast_windspeed', models.FloatField()),
-                ('forecast_pressure', models.FloatField()),
-                ('forecast_date', models.DateTimeField(default=datetime.date(2019, 10, 3))),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("forecast_summary", models.CharField(max_length=1000)),
+                ("forecast_temperature", models.FloatField()),
+                ("forecast_humidity", models.FloatField()),
+                ("forecast_windspeed", models.FloatField()),
+                ("forecast_pressure", models.FloatField()),
+                (
+                    "forecast_date",
+                    models.DateTimeField(default=datetime.date(2019, 10, 3)),
+                ),
             ],
         ),
     ]

@@ -6,14 +6,14 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pages', '0001_initial'),
+        ("pages", "0001_initial"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='Quotes',
+            name="Quotes",
         ),
         migrations.DeleteModel(
-            name='Skills',
+            name="Skills",
         ),
     ]

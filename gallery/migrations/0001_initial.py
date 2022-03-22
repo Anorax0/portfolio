@@ -8,19 +8,29 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='GalleryItems',
+            name="GalleryItems",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to='images/')),
-                ('description', models.TextField(max_length=300)),
-                ('title', models.TextField(default='Image')),
-                ('date', models.DateTimeField(blank=True, default=datetime.datetime.now)),
-                ('is_published', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("image", models.ImageField(upload_to="images/")),
+                ("description", models.TextField(max_length=300)),
+                ("title", models.TextField(default="Image")),
+                (
+                    "date",
+                    models.DateTimeField(blank=True, default=datetime.datetime.now),
+                ),
+                ("is_published", models.BooleanField(default=False)),
             ],
         ),
     ]

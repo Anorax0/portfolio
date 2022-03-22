@@ -78,24 +78,19 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title text-capitalize text-center" id="ModalLongTitle">
-						<i class="far fa-lightbulb"></i> Firstly it was displaing weather info, but API is gone...</h5>
+						<i class="far fa-lightbulb"></i> Current weather for Gdynia, Poland</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 			<div class="modal-body">
 				<img src="{% static 'images/bg.jpg' %}" class="img-fluid mb-3" alt="Modal Image" />
-				{% if weather %}
-					<p><b>Summary: </b>{{ weather.forecast_summary }}</p>
-					<p><b>Temperature: </b> {{ weather.forecast_temperature }} ˚C</p>
-					<p><b>Humidity: </b>{{ weather.forecast_humidity }} %</p>
-					<p><b>Wind Speed: </b>{{ weather.forecast_windspeed }} km/h</p>
-					<p><b>Pressure: </b>{{ weather.forecast_pressure }} hPA</p>
-					<br>
-					<p><a href="https://darksky.net/poweredby/" target="_blank">Powered by Dark Sky</a></p>
-				{% else %}
-					<p>Thanks for understanding.</p>
-				{% endif %}
+				<p><b>Summary: </b>{{ weather.forecast_summary }}</p>
+				<p><b>Temperature: </b> {{ weather.forecast_temperature }} ˚C</p>
+				<p><b>Humidity: </b>{{ weather.forecast_humidity }} %</p>
+				<p><b>Wind Speed: </b>{{ weather.forecast_windspeed }} km/h</p>
+				<br>
+				<p><a href="https://weatherdbi.herokuapp.com/" target="_blank">Powered by weatherDB</a></p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

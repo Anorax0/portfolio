@@ -1,46 +1,52 @@
 import requests
-from random import randrange
+from random import randint
 from datetime import datetime
+import logging
+
+log = logging.getLogger(__name__)
 
 
-class TodaysInfo(object):
+class TodaysInfo:
+    response = {"events": {}, "deaths": {}, "births": {}}
 
-    @staticmethod
-    def get_response(event_type):
+    def get_response(self, event_type: str) -> None:
         """
         :param event_type: events / deaths / births
-        :return:
+        :return: None
         """
-        date = datetime.today().strftime("%d %m").split(' ')
+        date = datetime.today().strftime("%d %m").split(" ")
         day, month = int(date[0]), int(date[1])
-        headers = {'accept': 'application/json'}
+        headers = {"accept": "application/json"}
         try:
-            return requests.get(f'https://byabbe.se/on-this-day/{month}/{day}/{event_type}.json',
-                                headers=headers)
-        except requests.exceptions.RequestException:
-            return None
+            self.response[event_type] = requests.request(
+                "GET",
+                f"https://byabbe.se/on-this-day/{month}/{day}/{event_type}.json",
+                headers=headers,
+            ).json()
+        except requests.exceptions.RequestException as e:
+            log.error("Cannot retrieve today's info due to error: ", e)
 
-    @staticmethod
-    def get_response_data(response, event_type):
-        if response.status_code == 200:
-            json_response = response.json()
-            random_item = randrange(len(json_response[event_type]))
-            output = json_response[event_type][random_item]
-            return output
-        else:
-            return None
+    def get_response_data(self, event_type: str) -> str:
+        random_item = randint(0, len(self.response.get(event_type)[event_type]) - 1)
+        output = self.response.get(event_type)[event_type][random_item]
+        return output
 
     def todays_event(self):
-        response = self.get_response('events')
-        output = self.get_response_data(response, 'events')
-        return output
+        return self.get_response_data("events")
 
     def todays_deaths(self):
-        response = self.get_response('deaths')
-        output = self.get_response_data(response, 'deaths')
-        return output
+        return self.get_response_data("deaths")
 
     def todays_births(self):
-        response = self.get_response('births')
-        output = self.get_response_data(response, 'births')
-        return output
+        return self.get_response_data("births")
+
+    def get_events(self):
+        self.get_response("events")
+        self.get_response("deaths")
+        self.get_response("births")
+
+        return {
+            "events": self.todays_event(),
+            "deaths": self.todays_deaths(),
+            "births": self.todays_births(),
+        }

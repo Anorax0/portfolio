@@ -16,13 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
-from django.conf.urls import url
 from django.conf.urls.static import static
-from django.shortcuts import HttpResponseRedirect
 
 urlpatterns = [
-    path('', include('pages.urls')),
-    path('admin/', admin.site.urls),
-    url(r'^$', lambda x: HttpResponseRedirect('/admin')),
-    path('gallery/', include('gallery.urls'))
+    path("", include("pages.urls")),
+    path("admin/", admin.site.urls),
+    path("gallery/", include("gallery.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

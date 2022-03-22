@@ -1,0 +1,14 @@
+eggs
+bin
+develop-eggs
+**/node_modules
+js/tmp
+var
+.installed.cfg
+.mr.developer.cfg
+.python-version
+.vscode
+.idea
+.env
+.env-db
+

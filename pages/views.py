@@ -1,84 +1,94 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib import messages, auth
-from .models import ContactForm, Skills, Projects, Quotes
-from .todays_info import TodaysInfo
-from .tasks import send_email_task
+from pages.models import About, ContactForm, Skills, Projects, Quotes
+from pages.todays_info import TodaysInfo
+from pages.tasks import send_email_task
+from pages.weather import WeatherAPI
 
-from random import choice
+
+import logging
+
+log = logging.getLogger(__name__)
 
 
 def index(request):
-    if request.method == 'GET':
+    if request.method == "GET":
+
         # get all skills
-        skills = Skills.objects.all()
+        skills = Skills().get_all()
 
         # get quotes
-        try:
-            all_quotes = Quotes.objects.filter().values_list('id', flat=True)
-            random_quote = choice(all_quotes)
-            quote = Quotes.objects.get(id=random_quote)
-        except IndexError:
-            quote = None
+        quote = Quotes().get_random_quote()
 
-        todays_event = TodaysInfo().todays_event()
-        todays_deaths = TodaysInfo().todays_deaths()
-        todays_births = TodaysInfo().todays_births()
+        # get today's inf
+        todays_info = TodaysInfo().get_events()
 
-        projects_list = Projects.objects.all().filter(is_published=True)
+        # get today's weather
+        weather = WeatherAPI().get()
 
-        return render(request, 'pages/index.html', {'skills': skills,
-                                                    'quote': quote,
-                                                    'projects': projects_list,
-                                                    'todays_event': todays_event,
-                                                    'todays_deaths': todays_deaths,
-                                                    'todays_births': todays_births})
+        # get list of projects
+        projects_list = Projects().get_all()
 
-    elif request.method == 'POST':
+        return render(
+            request,
+            "pages/index.html",
+            {
+                "skills": skills,
+                "quote": quote,
+                "projects": projects_list,
+                "todays_event": todays_info["events"],
+                "todays_deaths": todays_info["deaths"],
+                "todays_births": todays_info["births"],
+                "weather": weather,
+            },
+        )
+
+    elif request.method == "POST":
         login(request)
 
 
 def about(request):
-    # It wasn't necessary to create this view for static page, but nobody knows when page will be used differently
-    return render(request, 'pages/about.html')
+    context = {"about": About.objects.first()}
+    return render(request, "pages/about.html", context)
 
 
 def contact(request):
-    if request.method == 'POST':
-        name = request.POST['name']
-        email = request.POST['email']
-        message = request.POST['message']
+    if request.method == "POST":
+        name = request.POST["name"]
+        email = request.POST["email"]
+        message = request.POST["message"]
 
         contact_form = ContactForm(name=name, email=email, message=message)
         contact_form.save()
 
         # celery task
-        send_email_task.delay(name)
+        send_email_task(name, message)
 
-        messages.success(request, 'Your message has been send.')
-        return render(request, 'pages/contact.html')
+        messages.success(request, "Your message has been send.")
+        return render(request, "pages/contact.html")
     else:
-        return render(request, 'pages/contact.html')
+        return render(request, "pages/contact.html")
 
 
 def login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
 
         user = auth.authenticate(username=username, password=password)
 
         if user is not None:
             auth.login(request, user)
-            return HttpResponseRedirect('admin')
+            return HttpResponseRedirect("admin")
         else:
             messages.error(request, "Invalid credentials.")
-            return HttpResponseRedirect('login')
+            return HttpResponseRedirect("login")
     else:
-        return render(request, 'pages/login.html')
+        return render(request, "pages/login.html")
 
 
 def projects(request, project=None):
-    if project == 'compiler':
-        return render(request, 'pages/compiler.html')
+    if project == "compiler":
+        return render(request, "pages/compiler.html")
     else:
-        return HttpResponseRedirect('index')
+        return HttpResponseRedirect("index")
