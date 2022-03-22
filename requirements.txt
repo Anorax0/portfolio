@@ -40,7 +40,7 @@ mapq==0.3
 more-itertools==8.12.0
 multidict==5.2.0
 packaging==21.3
-Pillow==8.4.0
+Pillow==9.0.1
 prompt-toolkit==3.0.28
 psycopg2-binary==2.9.3
 pyparsing==3.0.7
