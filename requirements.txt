@@ -11,7 +11,7 @@ boto3==1.21.23
 botocore==1.24.23
 cached-property==1.5.2
 celery==5.1.2
-certifi==2021.10.8
+certifi==2022.12.7
 chardet==4.0.0
 charset-normalizer==2.0.12
 click==7.1.2
